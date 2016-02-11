@@ -1,0 +1,17 @@
+Package: Rexperigen
+Title: R interface to Experigen
+Version: 0.0.0.9000
+Authors@R: person("Daniel", "Szeredi", email = "daniel@szeredi.hu", role = c("aut", "cre"))
+Description: Rexperigen contains convenience functions to communicate with
+    an Experigen server. It is especially helpful with registered experiments, as
+    authentication with the server has to happen.
+Depends:
+    R (>= 3.2.3)
+License: GPL-3
+URL: https://github.com/aquincum/Rexperigen
+LazyData: true
+Imports:
+    RCurl
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
