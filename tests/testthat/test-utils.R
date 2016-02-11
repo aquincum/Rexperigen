@@ -10,3 +10,4 @@ test_that("URL preparation works", {
     expect_equal(create.API.request.URL("alma.com", "print", list(a=1, b="korte")),
                  "http://alma.com/print?a=1&b=korte")
 })
+
