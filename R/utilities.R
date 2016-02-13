@@ -46,10 +46,43 @@ create.API.request.URL <- function(server, request, params = list()){
 #' @param request The request verb to the server
 #' @param params A list of name=value pairs that will be passed
 #' to the server
+#' @param auth Do we send authentication? If this is FALSE, we don't.
+#' @param authparams A list of username and password.
 #' 
 #' @export
-API.request <- function(server, request, params = list()){
+API.request <- function(server,
+                        request,
+                        params = list(),
+                        auth = FALSE,
+                        authparams = list()){
     url <- create.API.request.URL(server, request, params)
+    if(auth){
+        if(length(authparams) < 2 ||
+           nchar(authparams$username) < 1 ||
+           nchar(authparams$password) < 1)
+        {
+            stop("authparams needs username & password")
+        }
+        res <- tryCatch(
+            RCurl::getURL(url,
+                          username = authparams$username,
+                          password = authparams$password,
+                          httpauth = RCurl::AUTH_DIGEST),
+            error = function(e){
+                stop(paste("Error downloading results:",e$message))
+            }
+        )
+        return(res)
+    }
+    else {
+        res <- tryCatch(
+            RCurl::getURL(url),
+            error = function(e){
+                stop(paste("Error downloading results:",e$message))
+            }
+        )
+        return(res)
+    }
 }
 
 
@@ -69,4 +102,9 @@ server.version <- function(server){
     else {
         "1.0.0"
     }
+}
+
+function(){
+
+
 }
