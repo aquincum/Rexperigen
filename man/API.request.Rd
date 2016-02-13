@@ -4,15 +4,18 @@
 \alias{API.request}
 \title{Run a request to the API}
 \usage{
-API.request(server, request, params = list())
+API.request(server = getOption("Rexperigen.server"), request = "version",
+  params = list(), auth = FALSE)
 }
 \arguments{
 \item{server}{The server name (no need to be clean)}
 
 \item{request}{The request verb to the server}
 
-\item{params}{A list of name=value pairs that will be passed
+\item{params}{A list of \code{name=value} pairs that will be passed
 to the server}
+
+\item{auth}{Do we send authentication? If this is \code{FALSE}, we don't.}
 }
 \description{
 Run a request to the API

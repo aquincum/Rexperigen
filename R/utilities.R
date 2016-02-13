@@ -44,29 +44,21 @@ create.API.request.URL <- function(server, request, params = list()){
 #'
 #' @param server The server name (no need to be clean)
 #' @param request The request verb to the server
-#' @param params A list of name=value pairs that will be passed
+#' @param params A list of \code{name=value} pairs that will be passed
 #' to the server
-#' @param auth Do we send authentication? If this is FALSE, we don't.
-#' @param authparams A list of username and password.
+#' @param auth Do we send authentication? If this is \code{FALSE}, we don't.
 #' 
 #' @export
-API.request <- function(server,
-                        request,
+API.request <- function(server = getOption("Rexperigen.server"),
+                        request = "version",
                         params = list(),
-                        auth = FALSE,
-                        authparams = list()){
+                        auth = FALSE){
     url <- create.API.request.URL(server, request, params)
     if(auth){
-        if(length(authparams) < 2 ||
-           nchar(authparams$username) < 1 ||
-           nchar(authparams$password) < 1)
-        {
-            stop("authparams needs username & password")
-        }
         res <- tryCatch(
             RCurl::getURL(url,
-                          username = authparams$username,
-                          password = authparams$password,
+                          username = getOption("Rexperigen.experimenter"),
+                          password = getOption("Rexperigen.password"),
                           httpauth = RCurl::AUTH_DIGEST),
             error = function(e){
                 stop(paste("Error downloading results:",e$message))
@@ -95,16 +87,20 @@ API.request <- function(server,
 #' @export
 server.version <- function(server){
     url <- prepare.server.URL(server)
-    url <- paste0(url,"/version")
-    if(RCurl::url.exists(url)){
-        RCurl::getURL(url)
+    if(RCurl::url.exists(paste0(url,"version"))){
+        RCurl::getURL(paste0(url,"version"))
     }
     else {
-        "1.0.0"
+        if(RCurl::url.exists(paste0(url,"makecsv.cgi"))){
+            "1.0.0"
+        }
+        else {
+            NO_SERVER_ERROR
+        }
     }
 }
 
-function(){
+#' Error string returned when no server is found
+#' @export
+NO_SERVER_ERROR <- "no Experigen server there"
 
-
-}
