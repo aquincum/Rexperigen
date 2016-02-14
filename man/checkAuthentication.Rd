@@ -5,14 +5,16 @@
 \title{Checks whether the authentication is supported by the server
 and handles the different POST request routes.}
 \usage{
-checkAuthentication(request, version.needed = 1)
+checkAuthentication(request, auth, version.needed = 1)
 }
 \arguments{
-\item{request}{The needed request to be made (without \code{.cgi})}
+\item{request}{The needed request to be made (without \code{.cgi}).}
+
+\item{auth}{Whether authentication is requested in R.}
 
 \item{version.needed}{The minimum version of the request. If it is
 \code{1}, and the server is version 1, the function will append
-\code{.cgi} to the request}
+\code{.cgi} to the request.}
 }
 \value{
 A list: \enumerate{

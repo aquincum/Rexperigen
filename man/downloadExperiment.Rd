@@ -19,7 +19,7 @@ saved in \code{default.csv}, which is the default file to download.}
 \item{auth}{Whether authentication is needed}
 }
 \value{
-The downloaded data set
+The downloaded data set as data frame
 }
 \description{
 Makes a download request from the server. There will be easier
