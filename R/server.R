@@ -65,7 +65,9 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
             return(TRUE)
         }
         else{
-            print(paste("Problem with login:", me))
+            if(!quiet){
+                print(paste("Problem with login:", me))
+            }
             return(FALSE)
         }
     }
