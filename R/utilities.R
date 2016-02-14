@@ -104,3 +104,28 @@ server.version <- function(server){
 #' @export
 NO_SERVER_ERROR <- "no Experigen server there"
 
+
+#' Checks whether the authentication is supported by the server
+#' and handles the different POST request routes.
+#'
+#' @param request The needed request to be made (without \code{.cgi}).
+#' @param auth Whether authentication is requested in R.
+#' @param version.needed The minimum version of the request. If it is
+#' \code{1}, and the server is version 1, the function will append
+#' \code{.cgi} to the request.
+#'
+#' @return A list: \enumerate{
+#' \item \code{request}: the request to send
+#' \item \code{auth}: whether to still send an authenticated request.
+#' }
+checkAuthentication <- function(request, auth, version.needed = 1){
+    if(version.needed < 2){
+        request <- ifelse(versionMain() < 2, paste0(request, ".cgi"), request)
+    }
+    if(auth && versionMain() < 2){
+        warning("Experiment registration is not supported by the server, requesting without authentication.")
+        auth <- FALSE
+    }
+    list(request = request,
+         auth = auth)
+}

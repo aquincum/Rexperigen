@@ -7,25 +7,41 @@
 #' saved in \code{default.csv}, which is the default file to download. 
 #' @param auth Whether authentication is needed
 #'
-#' @return The downloaded data set
+#' @return The downloaded data set as data frame
 #' 
 #' @export
 #' 
-download.experiment <- function(sourceURL, experimentName,
+downloadExperiment <- function(sourceURL, experimentName,
                                 destination = "default.csv",
-                                auth = FALSE){
-    request <- ifelse(versionMain() < 2, "makecsv.cgi", "makecsv")
-    if(auth && versionMain() < 2){
-        warning("Experiment registration is not supported by the server, requesting without authentication.")
-        auth <- FALSE
-    }
-    API.request(request = request,
-                params = list(
-                    sourceurl = sourceURL,
-                    experimentName = experimentName,
-                    file = destination
-                ),
-                auth = auth)
+                               auth = FALSE){
+    request <- checkAuthentication("makecsv", auth)
+    res <- API.request(request = request$request,
+                       params = list(
+                           sourceurl = sourceURL,
+                           experimentName = experimentName,
+                           file = destination
+                       ),
+                auth = request$auth)
+    read.table(text = res, header = TRUE)
 }
 
 
+#' Requests the table of users from the server.
+#'
+#' @param sourceURL The source URL for the experiment
+#' @param experimentName The experiment name as set in \code{settings.js}
+#' @param auth Whether authentication is needed
+#'
+#' @return The table of users
+#'
+#' @export
+getUsers <- function(sourceURL, experimentName, auth = FALSE){
+    request <- checkAuthentication("users", auth)
+    res <- API.request(request = request$request,
+                       params = list(
+                           sourceurl = sourceURL,
+                           experimentName = experimentName
+                       ),
+                       auth = request$auth)
+    read.table(text = res, header = TRUE)
+}
