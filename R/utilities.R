@@ -47,19 +47,22 @@ create.API.request.URL <- function(server, request, params = list()){
 #' @param params A list of \code{name=value} pairs that will be passed
 #' to the server
 #' @param auth Do we send authentication? If this is \code{FALSE}, we don't.
+#' @param method The HTTP method to use (\code{GET | POST | PUT | DELETE}).
 #' 
 #' @export
 API.request <- function(server = getOption("Rexperigen.server"),
                         request = "version",
                         params = list(),
-                        auth = FALSE){
+                        auth = FALSE,
+                        method = "GET"){
     url <- create.API.request.URL(server, request, params)
     if(auth){
         res <- tryCatch(
             RCurl::getURL(url,
                           username = getOption("Rexperigen.experimenter"),
                           password = getOption("Rexperigen.password"),
-                          httpauth = RCurl::AUTH_DIGEST),
+                          httpauth = RCurl::AUTH_DIGEST,
+                          customrequest = method),
             error = function(e){
                 stop(paste("Error downloading results:",e$message))
             }
@@ -68,7 +71,8 @@ API.request <- function(server = getOption("Rexperigen.server"),
     }
     else {
         res <- tryCatch(
-            RCurl::getURL(url),
+            RCurl::getURL(url,
+                          customrequest = method),
             error = function(e){
                 stop(paste("Error downloading results:",e$message))
             }
@@ -126,6 +130,30 @@ checkAuthentication <- function(request, auth, version.needed = 1){
         warning("Experiment registration is not supported by the server, requesting without authentication.")
         auth <- FALSE
     }
+    if(auth){
+        request <- paste0("auth/", request)
+    }
     list(request = request,
          auth = auth)
+}
+
+#' Returns the cleaned source URL.
+#'
+#' Experigen has been using some URL cleaning since version 1. This function
+#' asks the server (if version >= 2) to return how it would clean the given
+#' URL. For older versions, you still have to replace /'s and stuff by .'s
+#' by yourself, sorry!
+#'
+#' @param sourceURL The source URL to clean
+#' @return The cleaned URL
+#' @export
+cleanURL <- function(sourceURL){
+    if(versionMain() < 2){
+        stop("Server doesn't support this request.")
+    }
+    res <- API.request(request = "cleanURL",
+                       params = list(sourceurl = sourceURL))
+    if(length(res) > length(sourceURL)){ # this has got to be an error
+        stop("There was a problem with the conversion -- maybe you are using illegal characters? Be on the lookout for -'s and _'s!")
+    }
 }

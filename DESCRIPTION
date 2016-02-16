@@ -11,7 +11,9 @@ License: GPL-3
 URL: https://github.com/aquincum/Rexperigen
 LazyData: true
 Imports:
-    RCurl
+    RCurl,
+    digest,
+    jsonlite
 Suggests:
     testthat
 RoxygenNote: 5.0.1

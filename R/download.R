@@ -1,6 +1,7 @@
-#' Makes a download request from the server. There will be easier
-#' functions provided too.
+#' Makes a download request from the server.
 #'
+#' This function downloads the results of an experiment.
+#' 
 #' @param sourceURL The source URL for the experiment
 #' @param experimentName The experiment name as set in \code{settings.js}
 #' @param destination The file to download. By default, all uploaded results are
@@ -25,6 +26,30 @@ downloadExperiment <- function(sourceURL, experimentName,
     read.table(text = res, header = TRUE)
 }
 
+#' Returns the list of destination files for an experiment.
+#'
+#' @param sourceURL The source URL for the experiment
+#' @param experimentName The experiment name as set in \code{settings.js}
+#' @param auth Whether authentication is needed
+#'
+#' @return The list of destinations
+#' @export
+getDestinations <- function(sourceURL, experimentName, auth = FALSE){
+    request <- checkAuthentication("destinations", auth, 2)
+    res <- API.request(request = request$request,
+                       params = list(
+                           sourceurl = sourceURL,
+                           experimentName = experimentName
+                       ),
+                       auth = request$auth)
+    tryCatch(
+        retval <- jsonlite::fromJSON(res),
+        error = function(cond){
+            stop(res)
+        }
+    )
+    retval
+}
 
 #' Requests the table of users from the server.
 #'
@@ -45,3 +70,4 @@ getUsers <- function(sourceURL, experimentName, auth = FALSE){
                        auth = request$auth)
     read.table(text = res, header = TRUE)
 }
+

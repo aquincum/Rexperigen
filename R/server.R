@@ -76,8 +76,36 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
     }
 }
 
+
+#' Create a login for yourself using this function
+#'
+#' @param experimenter The username.
+#' @param password Your password.
+#'
+#' @return A string that the server returns (\code{"done"} if success)
+#' @export
+createExperimenter <- function(experimenter, password){
+    if(versionMain() < 2){
+        stop("Server does not support registering experiments")
+    }
+    request <- "experimenter"
+    ha1 <- digest::digest(paste(experimenter, "Experimenters", password, sep = ":"),
+                          algo = "md5",
+                          serialize = FALSE)
+    r <- API.request(request = request,
+                     params = list(experimenter = experimenter,
+                                   ha1 = ha1),
+                     method = "POST")
+    if (r == "done") setExperigenCredentials(experimenter, password, check = TRUE, quiet = TRUE)
+    r
+}
+
+
+
+
 #' Returns the main version number of the server.
 #' @return The main version number as a numeric
+#' @export
 versionMain <- function(){
     v <- getOption("Rexperigen.server.version")
     if (v == "") v <- "0.0.0"

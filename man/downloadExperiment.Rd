@@ -2,8 +2,7 @@
 % Please edit documentation in R/download.R
 \name{downloadExperiment}
 \alias{downloadExperiment}
-\title{Makes a download request from the server. There will be easier
-functions provided too.}
+\title{Makes a download request from the server.}
 \usage{
 downloadExperiment(sourceURL, experimentName, destination = "default.csv",
   auth = FALSE)
@@ -22,7 +21,6 @@ saved in \code{default.csv}, which is the default file to download.}
 The downloaded data set as data frame
 }
 \description{
-Makes a download request from the server. There will be easier
-functions provided too.
+This function downloads the results of an experiment.
 }
 

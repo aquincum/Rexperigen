@@ -5,7 +5,7 @@
 \title{Run a request to the API}
 \usage{
 API.request(server = getOption("Rexperigen.server"), request = "version",
-  params = list(), auth = FALSE)
+  params = list(), auth = FALSE, method = "GET")
 }
 \arguments{
 \item{server}{The server name (no need to be clean)}
@@ -16,6 +16,8 @@ API.request(server = getOption("Rexperigen.server"), request = "version",
 to the server}
 
 \item{auth}{Do we send authentication? If this is \code{FALSE}, we don't.}
+
+\item{method}{The HTTP method to use (\code{GET | POST | PUT | DELETE}).}
 }
 \description{
 Run a request to the API
