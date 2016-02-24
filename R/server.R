@@ -55,7 +55,11 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
     ))
     if(check){
         if(versionMain() < 2){
-            stop("Too low version of Experigen server: does not support registration of experiments")
+            options(list(
+                Rexperigen.experimenter = "",
+                Rexperigen.password = ""
+            ))
+            stop("Too low version of Experigen server: registration of experiments not supported")
         }
         me <- API.request(request = "digest/me", auth = TRUE)
         if(me == experimenter){
@@ -68,6 +72,10 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
             if(!quiet){
                 print(paste("Problem with login:", me))
             }
+            options(list(
+                Rexperigen.experimenter = "",
+                Rexperigen.password = ""
+            ))
             return(FALSE)
         }
     }
@@ -86,7 +94,7 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
 #' @export
 createExperimenter <- function(experimenter, password){
     if(versionMain() < 2){
-        stop("Server does not support registering experiments")
+        stop("Registering experiments not supported by the server.")
     }
     request <- "experimenter"
     ha1 <- digest::digest(paste(experimenter, "Experimenters", password, sep = ":"),
