@@ -89,7 +89,7 @@ API.request <- function(server = getOption("Rexperigen.server"),
 #' @examples
 #' server.version("db.phonologist.org")
 #' @export
-server.version <- function(server){
+server.version <- function(server = getOption("Rexperigen.server")){
     url <- prepare.server.URL(server)
     if(RCurl::url.exists(paste0(url,"version"))){
         RCurl::getURL(paste0(url,"version"))
@@ -149,11 +149,12 @@ checkAuthentication <- function(request, auth, version.needed = 1){
 #' @export
 cleanURL <- function(sourceURL){
     if(versionMain() < 2){
-        stop("Server doesn't support this request.")
+        stop("This request is not supported by the server.")
     }
     res <- API.request(request = "cleanURL",
-                       params = list(sourceurl = sourceURL))
+                       params = list(sourceurl = URLencode(sourceURL, TRUE)))
     if(length(res) > length(sourceURL)){ # this has got to be an error
         stop("There was a problem with the conversion -- maybe you are using illegal characters? Be on the lookout for -'s and _'s!")
     }
+    res
 }
