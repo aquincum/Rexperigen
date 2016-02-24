@@ -131,7 +131,7 @@ checkAuthentication <- function(request, auth, version.needed = 1){
         auth <- FALSE
     }
     if(auth){
-        request <- paste0("auth/", request)
+        request <- paste0("digest/", request)
     }
     list(request = request,
          auth = auth)

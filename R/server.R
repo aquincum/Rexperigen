@@ -57,7 +57,7 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
         if(versionMain() < 2){
             stop("Too low version of Experigen server: does not support registration of experiments")
         }
-        me <- API.request(request = "auth/me", auth = TRUE)
+        me <- API.request(request = "digest/me", auth = TRUE)
         if(me == experimenter){
             if(!quiet){
                 print("Success!")

@@ -11,7 +11,7 @@
 #' @export
 registerExperiment <- function(sourceURL, experimentName){
     experimenter <- checkLogin()
-    API.request(request = "auth/registration",
+    API.request(request = "digest/registration",
                 params = list(
                     experimenter = experimenter,
                     sourceurl = sourceURL,
@@ -35,7 +35,7 @@ registerExperiment <- function(sourceURL, experimentName){
 #' @export
 removeRegistration <- function(sourceURL, experimentName){
     experimenter <- checkLogin()
-    API.request(request = "auth/registration",
+    API.request(request = "digest/registration",
                 params = list(
                     experimenter = experimenter,
                     sourceurl = sourceURL,
@@ -56,7 +56,7 @@ removeRegistration <- function(sourceURL, experimentName){
 #' @export
 getRegisteredExperiments <- function(){
     experimenter <- checkLogin()
-    res <- API.request(request = "auth/registration",
+    res <- API.request(request = "digest/registration",
                        params = list(experimenter = experimenter),
                        auth = TRUE,
                        method = "GET")
