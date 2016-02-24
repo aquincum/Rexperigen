@@ -60,7 +60,6 @@ test_that("getUsers", {
         },
         res <- getUsers("testurl", "testname")
     )
-    print(res)
     expect_equal(as.character(res$userCode[1]), "AAA111")
     expect_equal(res$records[2], 43)
 })

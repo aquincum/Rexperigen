@@ -77,7 +77,7 @@ checkLogin <- function(){
         stop("Not logged in.")
     }
     if(versionMain() < 2){
-        stop("Server does not support registering experiments")
+        stop("Registering experiments not supported by server.")
     }
     experimenter
 }
