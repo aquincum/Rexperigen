@@ -54,7 +54,7 @@ test_that("Authed API request", {
     options(Rexperigen.password = "")
 })
 
-test_that("serverVersion", function(){
+test_that("serverVersion", {
     with_mock(
         "RCurl::getURL" = function(...){
             "2.1.3"
