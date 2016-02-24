@@ -55,10 +55,7 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
     ))
     if(check){
         if(versionMain() < 2){
-            options(list(
-                Rexperigen.experimenter = "",
-                Rexperigen.password = ""
-            ))
+            logoutExperigen()
             stop("Too low version of Experigen server: registration of experiments not supported")
         }
         me <- API.request(request = "digest/me", auth = TRUE)
@@ -72,16 +69,23 @@ setExperigenCredentials <- function(experimenter, password, check = TRUE, quiet 
             if(!quiet){
                 print(paste("Problem with login:", me))
             }
-            options(list(
-                Rexperigen.experimenter = "",
-                Rexperigen.password = ""
-            ))
+            logoutExperigen()
             return(FALSE)
         }
     }
     else{
         return(TRUE)
     }
+}
+
+#' Simply removes the stored credentials, so following
+#' requests will be unauthenticated.
+#' @export
+logoutExperigen <- function(){
+    options(list(
+        Rexperigen.experimenter = "",
+        Rexperigen.password = ""
+    ))
 }
 
 
