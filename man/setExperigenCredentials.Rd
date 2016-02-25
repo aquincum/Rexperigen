@@ -32,4 +32,7 @@ setExperigenCredentials("joesmith", "1234")
 setExperigenCredentials("janemiller", "passdrow", check = FALSE)
 
 }
+\seealso{
+Other setup: \code{\link{setExperigenServer}}
+}
 

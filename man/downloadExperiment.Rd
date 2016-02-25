@@ -23,4 +23,14 @@ The downloaded data set as data frame
 \description{
 This function downloads the results of an experiment.
 }
+\examples{
+\dontrun{
+downloadExperiment("https...s3.amazonaws.com.myexperiment.index.html", "testing1")
+downloadExperiment("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+}
+}
+\seealso{
+Other download: \code{\link{getDestinations}},
+  \code{\link{getUsers}}
+}
 

@@ -23,4 +23,10 @@ Create an URL for a request to the Experigen API.
 \examples{
 create.API.request.URL("db.phonologist.org", "users", list(sourceurl="x.y", experimentName="z"))
 }
+\seealso{
+Other development: \code{\link{API.request}},
+  \code{\link{checkAuthentication}},
+  \code{\link{prepare.server.URL}},
+  \code{\link{server.version}}
+}
 

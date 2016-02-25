@@ -26,4 +26,15 @@ A list: \enumerate{
 Checks whether the authentication is supported by the server
 and handles the different POST request routes.
 }
+\examples{
+checkAuthentication("makecsv", TRUE)
+checkAuthentication("registration", TRUE, 2)
+
+}
+\seealso{
+Other development: \code{\link{API.request}},
+  \code{\link{create.API.request.URL}},
+  \code{\link{prepare.server.URL}},
+  \code{\link{server.version}}
+}
 

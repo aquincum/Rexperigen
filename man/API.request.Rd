@@ -22,4 +22,10 @@ to the server}
 \description{
 Run a request to the API
 }
+\seealso{
+Other development: \code{\link{checkAuthentication}},
+  \code{\link{create.API.request.URL}},
+  \code{\link{prepare.server.URL}},
+  \code{\link{server.version}}
+}
 

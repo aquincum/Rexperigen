@@ -9,7 +9,14 @@
 #' @param auth Whether authentication is needed
 #'
 #' @return The downloaded data set as data frame
-#' 
+#'
+#' @family download
+#'
+#' @examples
+#' \dontrun{
+#' downloadExperiment("https...s3.amazonaws.com.myexperiment.index.html", "testing1")
+#' downloadExperiment("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+#' }
 #' @export
 #' 
 downloadExperiment <- function(sourceURL, experimentName,
@@ -33,6 +40,13 @@ downloadExperiment <- function(sourceURL, experimentName,
 #' @param auth Whether authentication is needed
 #'
 #' @return The list of destinations
+#'
+#' @family download
+#'
+#' @examples
+#' \dontrun{
+#' getDestinations("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+#' }
 #' @export
 getDestinations <- function(sourceURL, experimentName, auth = FALSE){
     request <- checkAuthentication("destinations", auth, 2)
@@ -58,6 +72,13 @@ getDestinations <- function(sourceURL, experimentName, auth = FALSE){
 #' @param auth Whether authentication is needed
 #'
 #' @return The table of users
+#'
+#' @family download
+#'
+#' @examples
+#' \dontrun{
+#' getUsers("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+#' }
 #'
 #' @export
 getUsers <- function(sourceURL, experimentName, auth = FALSE){

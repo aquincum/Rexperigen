@@ -19,4 +19,14 @@ The table of users
 \description{
 Requests the table of users from the server.
 }
+\examples{
+\dontrun{
+getUsers("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+}
+
+}
+\seealso{
+Other download: \code{\link{downloadExperiment}},
+  \code{\link{getDestinations}}
+}
 

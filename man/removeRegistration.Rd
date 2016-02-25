@@ -19,4 +19,14 @@ Removes the registration of the experiment to the logged in experimenter.
 Does not remove any data though! All of the data will be available to
 anyone.
 }
+\examples{
+\dontrun{
+removeRegistration("https...s3.amazonaws.com.myexperiment.index.html", "running")
+}
+
+}
+\seealso{
+Other registration: \code{\link{getRegisteredExperiments}},
+  \code{\link{registerExperiment}}
+}
 

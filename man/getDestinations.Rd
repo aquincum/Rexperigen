@@ -19,4 +19,13 @@ The list of destinations
 \description{
 Returns the list of destination files for an experiment.
 }
+\examples{
+\dontrun{
+getDestinations("https...s3.amazonaws.com.myexperiment.index.html", "running", auth = TRUE)
+}
+}
+\seealso{
+Other download: \code{\link{downloadExperiment}},
+  \code{\link{getUsers}}
+}
 

@@ -13,4 +13,10 @@ The experimenter login user name
 Checks whether the user is logged in. It also throws an exception if the
 server is of an old version and logging in is not supported.
 }
+\examples{
+options(Rexperigen.server.version="2.0.0")
+setExperigenCredentials("my", "credentials", check = FALSE)
+checkLogin()
+
+}
 

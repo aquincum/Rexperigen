@@ -13,4 +13,14 @@ The parsed list of experiments
 Returns a list of the registered experiments for the logged in
 experimenter.
 }
+\examples{
+\dontrun{
+getRegisteredExperiments()
+}
+
+}
+\seealso{
+Other registration: \code{\link{registerExperiment}},
+  \code{\link{removeRegistration}}
+}
 

@@ -7,6 +7,8 @@
 #' @param server The server's URL
 #' @param check Whether to check the server's existence
 #'
+#' @family setup
+#' 
 #' @examples
 #' setExperigenServer("db.phonologist.org")
 #' setExperigenServer("localhost:3000", FALSE)
@@ -41,6 +43,8 @@ setExperigenServer <- function(server, check = TRUE){
 #' @return Whether the existence check is successful. If \code{check = FALSE},
 #' it will return \code{TRUE} by default
 #'
+#' @family setup
+#' 
 #' @examples
 #' \dontrun{
 #' setExperigenCredentials("joesmith", "1234")

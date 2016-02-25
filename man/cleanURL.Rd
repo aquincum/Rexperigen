@@ -18,4 +18,11 @@ asks the server (if version >= 2) to return how it would clean the given
 URL. For older versions, you still have to replace /'s and stuff by .'s
 by yourself, sorry!
 }
+\examples{
+\dontrun{
+cleanURL("https://s3.amazonaws.com/myexperiment/index.html")
+}
+
+
+}
 

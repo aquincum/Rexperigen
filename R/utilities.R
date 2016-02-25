@@ -6,6 +6,7 @@
 #'
 #' @param server A server name.
 #' @return A clean URL with protocol prefix and trailing slash.
+#' @family development
 #' @examples
 #' prepare.server.URL("db.phonologist.org")
 #' prepare.server.URL("https://myserver.com/")
@@ -25,6 +26,7 @@ prepare.server.URL <- function(server){
 #' to the server
 #' @return A URL that can be queried.
 #'
+#' @family development
 #' @examples
 #' create.API.request.URL("db.phonologist.org", "users", list(sourceurl="x.y", experimentName="z"))
 #' @export
@@ -49,6 +51,8 @@ create.API.request.URL <- function(server, request, params = list()){
 #' @param auth Do we send authentication? If this is \code{FALSE}, we don't.
 #' @param method The HTTP method to use (\code{GET | POST | PUT | DELETE}).
 #' 
+#' @family development
+#'
 #' @export
 API.request <- function(server = getOption("Rexperigen.server"),
                         request = "version",
@@ -88,6 +92,7 @@ API.request <- function(server = getOption("Rexperigen.server"),
 #' @return A string with the Experigen server version
 #' @examples
 #' server.version("db.phonologist.org")
+#' @family development
 #' @export
 server.version <- function(server = getOption("Rexperigen.server")){
     url <- prepare.server.URL(server)
@@ -118,10 +123,18 @@ NO_SERVER_ERROR <- "no Experigen server there"
 #' \code{1}, and the server is version 1, the function will append
 #' \code{.cgi} to the request.
 #'
+#' @examples
+#' checkAuthentication("makecsv", TRUE)
+#' checkAuthentication("registration", TRUE, 2)
+#'
+#' @family development
+#'
 #' @return A list: \enumerate{
 #' \item \code{request}: the request to send
 #' \item \code{auth}: whether to still send an authenticated request.
 #' }
+#'
+#' @export
 checkAuthentication <- function(request, auth, version.needed = 1){
     if(version.needed < 2){
         request <- ifelse(versionMain() < 2, paste0(request, ".cgi"), request)
@@ -146,6 +159,13 @@ checkAuthentication <- function(request, auth, version.needed = 1){
 #'
 #' @param sourceURL The source URL to clean
 #' @return The cleaned URL
+#'
+#' @examples
+#' \dontrun{
+#' cleanURL("https://s3.amazonaws.com/myexperiment/index.html")
+#' }
+#' 
+#'
 #' @export
 cleanURL <- function(sourceURL){
     if(versionMain() < 2){

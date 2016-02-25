@@ -19,4 +19,14 @@ Registers the given experiment to the experimenter.
 Returns the server's response. Do provide the credentials
 before calling this function
 }
+\examples{
+\dontrun{
+registerExperiment("https...s3.amazonaws.com.myexperiment.index.html", "running")
+}
+
+}
+\seealso{
+Other registration: \code{\link{getRegisteredExperiments}},
+  \code{\link{removeRegistration}}
+}
 

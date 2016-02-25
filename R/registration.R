@@ -8,6 +8,14 @@
 #' @param experimentName The experiment name as set in \code{settings.js}
 #'
 #' @return The server response.
+#'
+#' @family registration
+#'
+#' @examples
+#' \dontrun{
+#' registerExperiment("https...s3.amazonaws.com.myexperiment.index.html", "running")
+#' }
+#' 
 #' @export
 registerExperiment <- function(sourceURL, experimentName){
     experimenter <- checkLogin()
@@ -32,6 +40,14 @@ registerExperiment <- function(sourceURL, experimentName){
 #' @param experimentName The experiment name as set in \code{settings.js}
 #'
 #' @return The server response.
+#'
+#' @examples
+#' \dontrun{
+#' removeRegistration("https...s3.amazonaws.com.myexperiment.index.html", "running")
+#' }
+#' 
+#' @family registration
+#'
 #' @export
 removeRegistration <- function(sourceURL, experimentName){
     experimenter <- checkLogin()
@@ -53,6 +69,14 @@ removeRegistration <- function(sourceURL, experimentName){
 #' experimenter.
 #'
 #' @return The parsed list of experiments
+#'
+#' @family registration
+#'
+#' @examples
+#' \dontrun{
+#' getRegisteredExperiments()
+#' }
+#' 
 #' @export
 getRegisteredExperiments <- function(){
     experimenter <- checkLogin()
@@ -70,6 +94,12 @@ getRegisteredExperiments <- function(){
 #' server is of an old version and logging in is not supported.
 #'
 #' @return The experimenter login user name
+#'
+#' @examples
+#' options(Rexperigen.server.version="2.0.0")
+#' setExperigenCredentials("my", "credentials", check = FALSE)
+#' checkLogin()
+#' 
 #' @export
 checkLogin <- function(){
     experimenter <- getOption("Rexperigen.experimenter")

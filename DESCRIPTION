@@ -1,5 +1,5 @@
 Package: Rexperigen
-Title: R interface to Experigen
+Title: R Interface to Experigen
 Version: 0.0.0.9000
 Authors@R: person("Daniel", "Szeredi", email = "daniel@szeredi.hu", role = c("aut", "cre"))
 Description: Rexperigen contains convenience functions to communicate with

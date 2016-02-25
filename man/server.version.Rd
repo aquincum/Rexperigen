@@ -4,7 +4,7 @@
 \alias{server.version}
 \title{Returns the version of an Experigen server}
 \usage{
-server.version(server)
+server.version(server = getOption("Rexperigen.server"))
 }
 \arguments{
 \item{server}{The server name}
@@ -17,5 +17,11 @@ Returns the version of an Experigen server
 }
 \examples{
 server.version("db.phonologist.org")
+}
+\seealso{
+Other development: \code{\link{API.request}},
+  \code{\link{checkAuthentication}},
+  \code{\link{create.API.request.URL}},
+  \code{\link{prepare.server.URL}}
 }
 

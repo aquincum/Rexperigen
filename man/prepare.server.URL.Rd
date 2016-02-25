@@ -22,4 +22,10 @@ prepare.server.URL("db.phonologist.org")
 prepare.server.URL("https://myserver.com/")
 
 }
+\seealso{
+Other development: \code{\link{API.request}},
+  \code{\link{checkAuthentication}},
+  \code{\link{create.API.request.URL}},
+  \code{\link{server.version}}
+}
 

@@ -27,4 +27,7 @@ setExperigenServer("db.phonologist.org")
 setExperigenServer("localhost:3000", FALSE)
 
 }
+\seealso{
+Other setup: \code{\link{setExperigenCredentials}}
+}
 
