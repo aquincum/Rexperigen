@@ -22,15 +22,30 @@
 downloadExperiment <- function(sourceURL, experimentName,
                                 destination = "default.csv",
                                auth = FALSE){
-    request <- checkAuthentication("makecsv", auth)
-    res <- API.request(request = request$request,
-                       params = list(
-                           sourceurl = sourceURL,
-                           experimentName = experimentName,
-                           file = destination
-                       ),
-                auth = request$auth)
-    read.table(text = res, header = TRUE)
+    ## if versionMain > 2, we were streaming JSON, so we'll have to convert
+    if(versionMain() >= 2){
+        request <- checkAuthentication("streamresults", auth)
+        res <- API.request(request = request$request,
+                   params = list(
+                       sourceurl = sourceURL,
+                       experimentName = experimentName,
+                       file = destination,
+                       ndjson = "true"
+                   ),
+                   auth = request$auth)
+        jsonlite::stream_in(textConnection(res), verbose = FALSE)
+    }
+    else {
+        request <- checkAuthentication("makecsv", auth)
+        res <- API.request(request = request$request,
+                           params = list(
+                               sourceurl = sourceURL,
+                               experimentName = experimentName,
+                               file = destination
+                           ),
+                           auth = request$auth)
+        read.table(text = res, header = TRUE)
+    }
 }
 
 #' Returns the list of destination files for an experiment.
