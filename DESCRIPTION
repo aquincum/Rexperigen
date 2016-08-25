@@ -4,11 +4,12 @@ Version: 0.2.1
 Authors@R: person("Daniel", "Szeredi", email = "daniel@szeredi.hu", role = c("aut", "cre"))
 Maintainer: Daniel Szeredi <daniel@szeredi.hu>
 Description: Provides convenience functions to communicate with
-    an Experigen server: Experigen is an online framework for the creation
-    of linguistic experiments, and it stores the results on a dedicated
-    server. This package can be used to retrieve the results from the server,
-    and it is especially helpful with registered experiments, as authentication
-    with the server has to happen.
+    an Experigen server: Experigen (<http://github.com/aquincum/experigen>)
+    is an online framework for creating  linguistic experiments,
+    and it stores the results on a dedicated server. This package can be
+    used to retrieve the results from the server, and it is especially
+    helpful with registered experiments, as authentication with the server
+    has to happen.
 Depends:
     R (>= 3.2.3)
 License: GPL-3
