@@ -33,7 +33,11 @@ downloadExperiment <- function(sourceURL, experimentName,
                        ndjson = "true"
                    ),
                    auth = request$auth)
-        jsonlite::stream_in(textConnection(res), verbose = FALSE)
+        ## newlines can magically disappear, fix that
+        if(grepl("\\}\\{", res)){
+            res <- gsub("\\}\\{", "\\}\n\\{", res)
+        }
+        jsonlite::stream_in(textConnection(res2), verbose = FALSE)
     }
     else {
         request <- checkAuthentication("makecsv", auth)
