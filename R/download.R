@@ -37,7 +37,7 @@ downloadExperiment <- function(sourceURL, experimentName,
         if(grepl("\\}\\{", res)){
             res <- gsub("\\}\\{", "\\}\n\\{", res)
         }
-        jsonlite::stream_in(textConnection(res2), verbose = FALSE)
+        jsonlite::stream_in(textConnection(res), verbose = FALSE)
     }
     else {
         request <- checkAuthentication("makecsv", auth)
